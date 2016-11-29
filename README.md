@@ -3,6 +3,7 @@
 ## Contents
 
   - vibrancy vs backgroundColor
+  - `useContentSize` will affect min,max size of the window
   - win.center() #TODO
 
 ## Install

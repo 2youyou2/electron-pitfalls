@@ -1,10 +1,10 @@
 'use strict';
 
-const {app, BrowserWindow} = require('electron')
-const path = require('path')
-const url = require('url')
+const {app, BrowserWindow} = require('electron');
+const path = require('path');
+const url = require('url');
 
-let win
+let win;
 
 app.on('ready', () => {
   win = new BrowserWindow({
@@ -18,9 +18,9 @@ app.on('ready', () => {
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
     slashes: true
-  }))
+  }));
 });
 
 app.on('window-all-closed', () => {
-  app.quit()
-})
+  app.quit();
+});

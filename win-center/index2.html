@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>Window 02</title>
+    <meta charset="utf-8">
+
+    <style>
+      body {
+        margin: 10px;
+      }
+
+      h2 {
+        color: #f90;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>Window in External Display</h2>
+    <button id="btn">center</button>
+
+    <script>
+      const electron = require('electron');
+      let btn = document.getElementById('btn');
+      btn.addEventListener('click', () => {
+        electron.remote.getCurrentWindow().center();
+      });
+    </script>
+  </body>
+</html>

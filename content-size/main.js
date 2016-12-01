@@ -25,7 +25,7 @@ app.on('ready', () => {
 
   win2 = new BrowserWindow({
     useContentSize: false,
-    x: 500,
+    x: 510,
     y: 100,
     width: 400,
     height: 300,

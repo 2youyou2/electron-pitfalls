@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/jwu/electron-pitfalls#readme",
   "dependencies": {
-    "electron": "1.4.7"
+    "electron": "1.4.10"
   }
 }

@@ -4,21 +4,38 @@ const {app, BrowserWindow} = require('electron');
 const path = require('path');
 const url = require('url');
 
-let win;
+let win1, win2;
 
 app.on('ready', () => {
-  win = new BrowserWindow({
-    width: 800,
-    height: 600,
+  win1 = new BrowserWindow({
+    x: 100,
+    y: 100,
+    width: 400,
+    height: 400,
     vibrancy: 'dark',
-    // backgroundColor: '#333', // NOTE: this will make vibrancy effect no use at all.
   });
 
-  win.loadURL(url.format({
+  win1.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
     slashes: true
   }));
+
+  win2 = new BrowserWindow({
+    useContentSize: false,
+    x: 510,
+    y: 100,
+    width: 400,
+    height: 400,
+    backgroundColor: '#333', // NOTE: this will make vibrancy effect no use at all.
+  });
+
+  win2.loadURL(url.format({
+    pathname: path.join(__dirname, 'index2.html'),
+    protocol: 'file:',
+    slashes: true
+  }));
+
 });
 
 app.on('window-all-closed', () => {

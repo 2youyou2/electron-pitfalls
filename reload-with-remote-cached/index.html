@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>Window 01</title>
+    <meta charset="utf-8">
+
+    <style>
+      body {
+        margin: 10px;
+      }
+
+      h2 {
+        color: #09f;
+      }
+
+      span {
+        color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>Reload with remote cached</h2>
+    <button id="btn">reload</button>
+
+    <div>Click the reload button or use ctrl/command + R to reload, then type <span>remoteFoo.bar</span> in your devtools.</div>
+
+    <script>
+      const electron = require('electron');
+
+      let remoteFoo = electron.remote.getGlobal('foo');
+      let btn = document.getElementById('btn');
+      btn.addEventListener('click', () => {
+        electron.remote.getCurrentWindow().reload();
+      });
+
+      window.addEventListener('beforeunload', event => {
+        // stop reload
+        event.returnValue = true;
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <title>Main Window</title>
+    <meta charset="utf-8">
+
+    <style>
+      body {
+        margin: 10px;
+      }
+
+      h2 {
+        color: #09f;
+      }
+
+      span {
+        color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button id="btn">Spawn Worker</button>
+
+    <div>Click the spawn button to spawn a worker.</div>
+
+    <script>
+      const electron = require('electron');
+
+      let btn = document.getElementById('btn');
+      btn.addEventListener('click', () => {
+        electron.ipcRenderer.send('spawn-worker', 'worker.html');
+      });
+
+    </script>
+  </body>
+</html>

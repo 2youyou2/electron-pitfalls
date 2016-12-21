@@ -1,7 +1,7 @@
 'use strict';
 
 const electron = require('electron');
-const {spawn} = require('child_process');
+const spawn = require('child_process').spawn;
 const path = require('path');
 const fs = require('fs');
 

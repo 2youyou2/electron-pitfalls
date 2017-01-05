@@ -51,17 +51,26 @@
             top: (Math.random() * 1000) | 0
           }
           input = input.then(data => {
-            canvas = canvas;
-
             return Sharp(data, opts)
               .overlayWith(src, offset)
-              .toBuffer();
+              .toBuffer()
+              .then(buffer => {
+                global.gc();
+                
+                return new Promise(function (resolve, reject) {
+                    requestAnimationFrame(function () {
+                        resolve(buffer);
+                    });
+                });
+              });
           });
         }
 
         input.then(data => {
           Sharp(data, opts)
-            .toFile(dest);
+            .toFile(dest, err => {
+              global.gc();
+            });
         });
       });
 

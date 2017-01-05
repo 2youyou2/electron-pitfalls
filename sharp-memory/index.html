@@ -55,10 +55,8 @@
               .overlayWith(src, offset)
               .toBuffer()
               .then(buffer => {
-                if (global.gc) {
-                  global.gc();
-                }
-
+                global.gc();
+                
                 return new Promise(function (resolve, reject) {
                     requestAnimationFrame(function () {
                         resolve(buffer);
@@ -69,13 +67,9 @@
         }
 
         input.then(data => {
-          Sharp(data, opts)
-            .toFile(dest, err => {
-                if (global.gc) {
-                  global.gc();
-                }
-            });
-        });
+          return Sharp(data, opts)
+            .toFile(dest);
+        }).then(global.gc);
       });
 
     </script>

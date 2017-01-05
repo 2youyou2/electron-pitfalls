@@ -32,6 +32,7 @@ mathbox-playground/
 mojs-playground/
 d3-playground/
 demo/
+sharp/tmp.png
 
 # test files
 .settings/

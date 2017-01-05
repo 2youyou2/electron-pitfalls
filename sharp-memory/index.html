@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <title>Window 01</title>
+    <meta charset="utf-8">
+
+    <style>
+      body {
+        margin: 10px;
+      }
+
+      h2 {
+        color: #09f;
+      }
+
+      span {
+        color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>Test Sharp Memory Leak</h2>
+    <button id="btn">reload</button>
+
+    <div>Click button to pack image</div>
+
+    <script>
+      const Sharp = require('sharp');
+      const Path = require('path');
+      const Fs = require('fs');
+
+      Sharp.cache(false);
+
+      let btn = document.getElementById('btn');
+      btn.addEventListener('click', () => {
+        let width = 6000, height = 6000, channels = 4;
+        let canvas = Buffer.alloc(width*height*channels, 0);
+        let opts = { raw : { width, height, channels } };
+
+        let src = Path.join(__dirname, 'AutoAtlas-1.png');
+        let dest = Path.join(__dirname, 'tmp.png');
+
+        if (Fs.existsSync(dest)) {
+          Fs.unlinkSync(dest);
+        }
+
+        let input = Sharp(canvas, opts).toBuffer();
+        for (let i = 0; i<10; i++) {
+          let offset = {
+            left: (Math.random() * 1000) | 0,
+            top: (Math.random() * 1000) | 0
+          }
+          input = input.then(data => {
+            canvas = canvas;
+
+            return Sharp(data, opts)
+              .overlayWith(src, offset)
+              .toBuffer();
+          });
+        }
+
+        input.then(data => {
+          Sharp(data, opts)
+            .toFile(dest);
+        });
+      });
+
+    </script>
+  </body>
+</html>
